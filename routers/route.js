@@ -12,7 +12,6 @@ const route = express.Router();
 });*/
 //db.Usuario.create({login:'admin', senha:'1234', tipo:2});
 
-
 module.exports = route;
 
 const storage = multer.diskStorage({
