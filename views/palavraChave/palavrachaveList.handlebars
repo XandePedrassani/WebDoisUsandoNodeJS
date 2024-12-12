@@ -9,12 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        {{#each categorias}}
+        {{#each palavrachaves}}
         <tr>
             <th scope="row">{{nome}}</th>
             {{#if ../admin}}
-            <td><a href="categoriaUpdate/{{id}}">Editar</a></td>
-            <td><a href="categoriaDelete/{{id}}">Deletar</a></td>
+            <td><a href="palavrachaveUpdate/{{id}}">Editar</a></td>
+            <td><a href="palavrachaveDelete/{{id}}">Deletar</a></td>
             {{/if}}
         </tr>
         {{/each}}

@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('../config/db_sequelize');
 const controllerUsuario = require('../controllers/controllerUsuario');
 const controllerComentario = require('../controllers/controllerComentario');
-const controllerCategoria = require('../controllers/controllerCategoria');
+const controllerPalavraChave = require('../controllers/controllerPalavrachave');
 const controllerReceita = require('../controllers/controllerReceita');
 const multer = require('multer');
 const route = express.Router();
@@ -47,12 +47,20 @@ route.post("/usuarioUpdate", controllerUsuario.postUpdate);
 route.get("/usuarioDelete/:id", controllerUsuario.getDelete);
 
 //Controller Categoria
-route.get("/categoriaCreate", controllerCategoria.getCreate);
-route.post("/categoriaCreate", controllerCategoria.postCreate);
-route.get("/categoriaList", controllerCategoria.getList);
-route.get("/categoriaUpdate/:id", controllerCategoria.getUpdate);
-route.post("/categoriaUpdate", controllerCategoria.postUpdate);
-route.get("/categoriaDelete/:id", controllerCategoria.getDelete);
+//route.get("/categoriaCreate", controllerCategoria.getCreate);
+//route.post("/categoriaCreate", controllerCategoria.postCreate);
+//route.get("/categoriaList", controllerCategoria.getList);
+//route.get("/categoriaUpdate/:id", controllerCategoria.getUpdate);
+//route.post("/categoriaUpdate", controllerCategoria.postUpdate);
+//route.get("/categoriaDelete/:id", controllerCategoria.getDelete);
+
+//Controller Palavra-Chave
+route.get("/palavrachaveCreate", controllerPalavraChave.getCreate);
+route.post("/palavrachaveCreate", controllerPalavraChave.postCreate);
+route.get("/palavrachaveList", controllerPalavraChave.getList);
+route.get("/palavrachaveUpdate/:id", controllerPalavraChave.getUpdate);
+route.post("/palavrachaveUpdate", controllerPalavraChave.postUpdate);
+route.get("/palavrachaveDelete/:id", controllerPalavraChave.getDelete);
 
 //Controller Receita
 route.get("/receitaCreate", controllerReceita.getCreate);

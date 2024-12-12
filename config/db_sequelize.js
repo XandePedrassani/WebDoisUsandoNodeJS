@@ -7,8 +7,8 @@ const sequelize = new Sequelize('web2_db', 'postgres', '1', {
 var db = {};
 db.sequelize = sequelize;
 db.Receita = require('../models/relational/receita.js')(sequelize, Sequelize);
-db.Categoria = require('../models/relational/categoria.js')(sequelize, Sequelize);
-db.Categoria.hasMany(db.Receita, {foreignKey:'categoriaId', onDelete: 'NO ACTION'});
+//db.Categoria = require('../models/relational/categoria.js')(sequelize, Sequelize);
+//db.Categoria.hasMany(db.Receita, {foreignKey:'categoriaId', onDelete: 'NO ACTION'});
 
 //Parte nova
 db.Usuario = require('../models/relational/usuario.js')(sequelize, Sequelize); //Mesmo que o exemplo
