@@ -7,9 +7,12 @@ const controllerReceita = require('../controllers/controllerReceita');
 const multer = require('multer');
 const route = express.Router();
 
-/*db.sequelize.sync({force: true}).then(() => {
-    console.log('{ force: true }');
-});*/
+/*
+db.sequelize.sync({force: true})
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+*/
+
 //db.Usuario.create({login:'admin', senha:'1234', tipo:2});
 
 module.exports = route;
