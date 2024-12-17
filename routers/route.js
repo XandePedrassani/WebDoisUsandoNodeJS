@@ -68,7 +68,7 @@ route.get("/palavrachaveDelete/:id", controllerPalavraChave.getDelete);
 
 //Controller Projeto
 route.get("/projetoCreate", controllerProjeto.getCreate);
-//route.post("/projetoCreate",  upload.single('imagem'), controllerProjeto.postCreate);
+route.post("/projetoCreate",  controllerProjeto.postCreate);
 //route.get("/projetoList", controllerProjeto.getList);
 //route.get("/projetoUpdate/:id", controllerProjeto.getUpdate);
 //route.post("/projetoUpdate", upload.single('imagem'), controllerProjeto.postUpdate);

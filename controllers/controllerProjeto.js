@@ -8,18 +8,22 @@ module.exports = {
             palavraChave: palavraChave.map(palavraChave => palavraChave.toJSON())
         });
     },
-/*    async postCreate(req, res) {
-        const {nome, ingredientes, preparo, categoriaId} = req.body;
-        const imagem = req.imageName;
-        db.Receita.create({nome, ingredientes, preparo, categoriaId, imagem})
-            .then(() => {
-                res.redirect('/home')
-            })
-            .catch((err) => {
-                console.log(err);
+    async postCreate(req, res) {
+        const {nome, resumo, link_externo, palavraChave} = req.body;
+        try{
+            const novoProjeto = await db.Projeto.create({nome, resumo, link_externo})
+            const novoProjetoId = novoProjeto.dataValues.id
+
+            palavraChave.forEach(async(element) => {
+                await db.ProjetoPalavraChave.create({projetoId: novoProjetoId, palavraChaveId: element})
             });
+
+            res.redirect('/home')
+        } catch(err){
+            console.log(err);
+        }
     },
-    async getList(req, res) {
+/*    async getList(req, res) {
         db.Receita.findAll().then(receitas => {
             res.render('receita/receitaList',
                 { receitas: receitas.map(receita => receita.toJSON()) });
