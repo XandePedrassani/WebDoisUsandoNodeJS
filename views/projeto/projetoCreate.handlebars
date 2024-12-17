@@ -1,0 +1,27 @@
+<form action="/projetoCreate" method="post">​
+    <div class="form-group">
+        <label for="inputNome">Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome">
+    </div>
+    <div class="form-group">
+        <label for="inputResumo">Resumo</label>
+        <input type="text" class="form-control" id="inputResumo" name="resumo">
+    </div>
+    <div class="form-group">
+        <label for="inputLinkExterno">Link Externo</label>
+        <input type="text" class="form-control" id="inputLinkExterno" name="link_externo">
+    </div>
+    <div class="form-group">
+        <label for="palavraChave">Palavra Chave:</label>
+        <table>
+            {{#each palavraChave}}
+            <tr>
+                <td><input type="checkbox" name="palavraChave[]" value="{{id}}"></td>
+                <td>{{nome}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>

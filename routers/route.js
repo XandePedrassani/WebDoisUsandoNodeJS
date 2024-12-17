@@ -3,6 +3,7 @@ const db = require('../config/db_sequelize');
 const controllerUsuario = require('../controllers/controllerUsuario');
 const controllerComentario = require('../controllers/controllerComentario');
 const controllerPalavraChave = require('../controllers/controllerPalavrachave');
+const controllerProjeto = require('../controllers/controllerProjeto')
 const controllerReceita = require('../controllers/controllerReceita');
 const multer = require('multer');
 const route = express.Router();
@@ -64,6 +65,15 @@ route.get("/palavrachaveList", controllerPalavraChave.getList);
 route.get("/palavrachaveUpdate/:id", controllerPalavraChave.getUpdate);
 route.post("/palavrachaveUpdate", controllerPalavraChave.postUpdate);
 route.get("/palavrachaveDelete/:id", controllerPalavraChave.getDelete);
+
+//Controller Projeto
+route.get("/projetoCreate", controllerProjeto.getCreate);
+route.post("/projetoCreate",  controllerProjeto.postCreate);
+//route.get("/projetoList", controllerProjeto.getList);
+//route.get("/projetoUpdate/:id", controllerProjeto.getUpdate);
+//route.post("/projetoUpdate", upload.single('imagem'), controllerProjeto.postUpdate);
+//route.get("/projetoDelete/:id", controllerProjeto.getDelete);
+
 
 //Controller Receita
 route.get("/receitaCreate", controllerReceita.getCreate);
