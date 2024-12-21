@@ -5,6 +5,7 @@ const controllerComentario = require('../controllers/controllerComentario');
 const controllerPalavraChave = require('../controllers/controllerPalavrachave');
 const controllerProjeto = require('../controllers/controllerProjeto')
 const controllerReceita = require('../controllers/controllerReceita');
+const controllerConhecimento = require("../controllers/controllerConhecimento");
 const multer = require('multer');
 const route = express.Router();
 
@@ -13,9 +14,12 @@ db.sequelize.sync({force: true})
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
 */
-
-//db.Usuario.create({login:'admin', senha:'1234', tipo:2});
-
+/*
+db.Usuario.create({login:'admin', senha:'1234', tipo:2});
+db.Conhecimento.create({nome:'Programação'});
+db.Conhecimento.create({nome:'Liderança'});
+db.Conhecimento.create({nome:'Corajoso'});
+*/
 module.exports = route;
 
 const storage = multer.diskStorage({
@@ -87,3 +91,9 @@ route.get("/receitaDelete/:id", controllerReceita.getDelete);
 route.get("/comentarioCreate", controllerComentario.getCreate);
 route.post("/comentarioCreate", controllerComentario.postCreate);
 route.get("/comentarioList", controllerComentario.getList);
+
+//Controller Conhecimento
+route.get("/conhecimentoCreate", controllerConhecimento.conhecimentosUsuario);
+route.post("/conhecimentoAlunoUpdate", controllerConhecimento.getUpdate);
+route.get("/conhecimentoAluno/delete/:id", controllerConhecimento.getDelete);
+

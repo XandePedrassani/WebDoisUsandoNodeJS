@@ -20,6 +20,7 @@ module.exports = {
                 //res.cookie("userData", user, { maxAge:30 * 60 * 1000, httpOnly: true });
                 req.session.login = req.body.login;
                 res.locals.login = req.body.login; 
+                req.session.userId = usuarios[0].dataValues.id;
                 if (usuarios[0].dataValues.tipo == 2) {
                     req.session.tipo = usuarios[0].dataValues.tipo;
                     res.locals.admin = true;
