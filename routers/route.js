@@ -73,10 +73,10 @@ route.get("/palavrachaveDelete/:id", controllerPalavraChave.getDelete);
 //Controller Projeto
 route.get("/projetoCreate", controllerProjeto.getCreate);
 route.post("/projetoCreate",  controllerProjeto.postCreate);
-//route.get("/projetoList", controllerProjeto.getList);
-//route.get("/projetoUpdate/:id", controllerProjeto.getUpdate);
+route.get("/projetoList", controllerProjeto.getList);
+route.get("/projetoUpdate/:id", controllerProjeto.getUpdate);
 //route.post("/projetoUpdate", upload.single('imagem'), controllerProjeto.postUpdate);
-//route.get("/projetoDelete/:id", controllerProjeto.getDelete);
+route.get("/projetoDelete/:id", controllerProjeto.getDelete);
 
 
 //Controller Receita
@@ -86,11 +86,6 @@ route.get("/receitaList", controllerReceita.getList);
 route.get("/receitaUpdate/:id", controllerReceita.getUpdate);
 route.post("/receitaUpdate", upload.single('imagem'), controllerReceita.postUpdate);
 route.get("/receitaDelete/:id", controllerReceita.getDelete);
-
-//Controller Comentario
-route.get("/comentarioCreate", controllerComentario.getCreate);
-route.post("/comentarioCreate", controllerComentario.postCreate);
-route.get("/comentarioList", controllerComentario.getList);
 
 //Controller Conhecimento
 route.get("/conhecimentoCreate", controllerConhecimento.conhecimentosUsuario);
