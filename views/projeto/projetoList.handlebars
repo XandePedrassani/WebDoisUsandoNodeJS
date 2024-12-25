@@ -1,0 +1,32 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Resumo</th>
+            <th scope="col">Link Externo</th>
+            <th scope="col">Palavras Chaves</th>
+            <th scope="col">Alunos</th>
+            {{#if admin}}
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+            {{/if}}
+        </tr>
+    </thead>
+    {{#each projetos}}
+    <tr>
+        <th scope="row">{{nome}}</th>
+        <td>{{resumo}}</td>
+        <td>{{link_externo}}</td>
+        <td>
+            {{#each palavraChave}}
+                <td>{{id}}</td><br>
+            {{/each}}
+        </td>
+        <td>{{categoriaId}}</td>
+        {{#if ../admin}}
+        <td><a href="projetoUpdate/{{id}}">Editar</a></td>
+        <td><a href="projetoDelete/{{id}}">Deletar</a></td>
+        {{/if}}
+    </tr>
+    {{/each}}
+</table>
