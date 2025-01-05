@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Atualizar Conhecimento</h1>
+    <form action="/conhecimentoUpdate" method="post">
+        <input type="hidden" name="id" value="{{conhecimento.id}}">
+        <div class="form-group">
+            <label for="inputNome">Nome do Conhecimento:</label>
+            <input type="text" class="form-control" id="inputNome" name="nome" value="{{conhecimento.nome}}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Atualizar Conhecimento</button>
+    </form>
+</div>

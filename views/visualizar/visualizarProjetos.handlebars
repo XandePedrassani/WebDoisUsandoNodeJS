@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Projetos</title>
+    <title>Visualizar Projetos</title>
     <link rel="stylesheet" href="/path/to/your/css/file.css">
     <style>
         table {
@@ -27,7 +27,19 @@
     </style>
 </head>
 <body>
-    <h1>Lista de Projetos</h1>
+    <h1>Visualizar Projetos</h1>
+    <form action="/visualizarProjetosFiltrados" method="get">
+        <div class="form-group">
+            <label for="palavraChave">Filtrar por Palavra-Chave:</label>
+            <select class="form-control" id="palavraChave" name="palavraChave">
+                <option value="">Nenhum Filtro</option>
+                {{#each palavrasChaveDisponiveis}}
+                    <option value="{{this.nome}}">{{this.nome}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
     <table>
         <thead>
             <tr>
@@ -37,7 +49,6 @@
                 <th>Link Externo</th>
                 <th>Palavras-Chave</th>
                 <th>Alunos</th>
-                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -56,12 +67,6 @@
                     {{#each this.Alunos}}
                         {{this.login}}{{#unless @last}}, {{/unless}}
                     {{/each}}
-                </td>
-                <td>
-                    <a href="/projetoUpdate/{{this.id}}" class="btn btn-primary">Editar</a>
-                    <form action="/projetoDelete/{{this.id}}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Deletar</button>
-                    </form>
                 </td>
             </tr>
             {{/each}}

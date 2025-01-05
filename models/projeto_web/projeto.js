@@ -20,21 +20,21 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    /*Projeto.associate = (models) => {
-        Projeto.belongsToMany(models.PalavraChave, {
-            through: models.ProjetoPalavraChave, // A tabela de junção
-            foreignKey: 'projetoId', // Chave estrangeira na tabela de junção
-            onDelete: 'NO ACTION' // Ação no delete
-        });
-    };
-
     Projeto.associate = (models) => {
-        Projeto.belongsToMany(models.ProjetoAlunos, {
-            through: models.ProjetoPalavraChave, // A tabela de junção
-            foreignKey: 'projetoId', // Chave estrangeira na tabela de junção
-            onDelete: 'NO ACTION' // Ação no delete
+        Projeto.belongsToMany(models.PalavraChave, {
+            through: 'ProjetoPalavraChave', 
+            foreignKey: 'projetoId',
+            as: 'PalavrasChave',
+            onDelete: 'NO ACTION'
         });
-    };*/
+        Projeto.belongsToMany(models.Usuario, {
+            as: 'Alunos',
+            through: 'ProjetoAluno',
+            foreignKey: 'projetoId',
+            onDelete: 'NO ACTION'
+        });
+        Projeto.hasMany(models.ProjetoAluno, { foreignKey: 'projetoId', as: 'ProjetoAlunos' });
+    };
 
     return Projeto;
 };

@@ -8,5 +8,10 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
+    ProjetoAluno.associate = (models) => {
+        ProjetoAluno.belongsTo(models.Projeto, { foreignKey: 'projetoId', as: 'Projeto' });
+        ProjetoAluno.belongsTo(models.Usuario, { foreignKey: 'usuarioId', as: 'Usuario' });
+    };
+
     return ProjetoAluno;
 };

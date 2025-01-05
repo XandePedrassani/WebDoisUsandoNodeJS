@@ -3,7 +3,7 @@
 <html>
 
 <head>​
-    <title>Sistema de Controle de Receitas</title>
+    <title>Sistema de Portifolio web</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -22,56 +22,54 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/home">Home <span class="sr-only"></span></a>
-                    </li>
+                    {{#if admin}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Usuários/Alunos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{#if admin}}
                             <a class="dropdown-item" href="/usuarioCreate">Criar</a>
-                            {{/if}}
-                            <a class="dropdown-item" href="/usuarioList">Listar</a>
+                            <a class="dropdown-item" href="/usuarioList">Listar</a>                
                         </div>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastro Conhecimentos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/conhecimentoList">Listagem</a>
+                        </div>
+
+                    {{/if}}
+
+                    {{#unless externo}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Palavras-Chave
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{#if admin}}
                             <a class="dropdown-item" href="/palavrachaveCreate">Criar</a>
-                            {{/if}}
                             <a class="dropdown-item" href="/palavrachaveList">Listar</a>
                         </div>
                     </li>
+
+                    {{#if aluno}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Projetos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{#if admin}}
                             <a class="dropdown-item" href="/projetoCreate">Criar</a>
-                            {{/if}}<a class="dropdown-item" href="/projetoList">Listar</a>
+                            <a class="dropdown-item" href="/projetoList">Listar</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Comentários
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{#if admin}}
-                            <a class="dropdown-item" href="/comentarioCreate">Criar</a>
-                            {{/if}}
-                            <a class="dropdown-item" href="/comentarioList">Listar</a>
-                        </div>
-                    </li>
+                    
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,6 +79,22 @@
                             <a class="dropdown-item" href="/conhecimentoCreate">Meus Conhecimentos</a>
                         </div>
                     </li>
+                    {{/if}}
+
+                    {{/unless}}
+
+                    {{#unless aluno}}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/visualizarProjetos">Visualizar Projetos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/relatorio">Relatório</a>
+                    </li>
+                
+                    {{/unless}}
+
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>

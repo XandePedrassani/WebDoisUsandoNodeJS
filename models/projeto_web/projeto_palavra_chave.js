@@ -8,5 +8,10 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
+    ProjetoPalavraChave.associate = (models) => {
+        ProjetoPalavraChave.belongsTo(models.Projeto, { foreignKey: 'projetoId' });
+        ProjetoPalavraChave.belongsTo(models.PalavraChave, { foreignKey: 'palavraChaveId' });
+    };
+
     return ProjetoPalavraChave;
 };

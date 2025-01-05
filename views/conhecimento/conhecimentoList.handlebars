@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Lista de Conhecimentos</h1>
+    <a href="/conhecimentoCreateAdmin" class="btn btn-primary">Criar Novo Conhecimento</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each conhecimentos}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.nome}}</td>
+                <td>
+                    <a href="/conhecimentoUpdate/{{this.id}}" class="btn btn-warning btn-sm">Editar</a>
+                    <form action="/conhecimentoDelete/{{this.id}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
