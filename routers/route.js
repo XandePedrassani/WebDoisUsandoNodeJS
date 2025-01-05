@@ -1,25 +1,25 @@
 const express = require('express');
-const db = require('../config/db_sequelize');
 const controllerUsuario = require('../controllers/controllerUsuario');
-const controllerComentario = require('../controllers/controllerComentario');
 const controllerPalavraChave = require('../controllers/controllerPalavrachave');
-const controllerProjeto = require('../controllers/controllerProjeto')
-const controllerReceita = require('../controllers/controllerReceita');
+const controllerProjeto = require('../controllers/controllerProjeto');
 const controllerConhecimento = require("../controllers/controllerConhecimento");
+const controllerRelatorio = require("../controllers/controllerRelatorio");
+const db = require('../config/db_sequelize');
 const multer = require('multer');
 const route = express.Router();
 
-/*
-db.sequelize.sync({force: true})
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error));
-*/
-/*
-db.Usuario.create({login:'admin', senha:'1234', tipo:2});
-db.Conhecimento.create({nome:'Programação'});
-db.Conhecimento.create({nome:'Liderança'});
-db.Conhecimento.create({nome:'Corajoso'});
-*/
+
+// db.sequelize.sync({force: true})
+//   .then((result) => console.log(result))
+//   .catch((error) => console.error(error));
+
+
+// db.Usuario.create({login:'admin', senha:'1234', tipo:2});
+// db.Usuario.create({login:'externo', senha:'1234', tipo:3});
+// db.Conhecimento.create({nome:'Programação'});
+// db.Conhecimento.create({nome:'Liderança'});
+// db.Conhecimento.create({nome:'Corajoso'});
+
 module.exports = route;
 
 const storage = multer.diskStorage({
@@ -54,14 +54,6 @@ route.get("/usuarioUpdate/:id", controllerUsuario.getUpdate);
 route.post("/usuarioUpdate", controllerUsuario.postUpdate);
 route.get("/usuarioDelete/:id", controllerUsuario.getDelete);
 
-//Controller Categoria
-//route.get("/categoriaCreate", controllerCategoria.getCreate);
-//route.post("/categoriaCreate", controllerCategoria.postCreate);
-//route.get("/categoriaList", controllerCategoria.getList);
-//route.get("/categoriaUpdate/:id", controllerCategoria.getUpdate);
-//route.post("/categoriaUpdate", controllerCategoria.postUpdate);
-//route.get("/categoriaDelete/:id", controllerCategoria.getDelete);
-
 //Controller Palavra-Chave
 route.get("/palavrachaveCreate", controllerPalavraChave.getCreate);
 route.post("/palavrachaveCreate", controllerPalavraChave.postCreate);
@@ -71,24 +63,33 @@ route.post("/palavrachaveUpdate", controllerPalavraChave.postUpdate);
 route.get("/palavrachaveDelete/:id", controllerPalavraChave.getDelete);
 
 //Controller Projeto
-route.get("/projetoCreate", controllerProjeto.getCreate);
-route.post("/projetoCreate",  controllerProjeto.postCreate);
-route.get("/projetoList", controllerProjeto.getList);
-route.get("/projetoUpdate/:id", controllerProjeto.getUpdate);
-//route.post("/projetoUpdate", upload.single('imagem'), controllerProjeto.postUpdate);
-route.get("/projetoDelete/:id", controllerProjeto.getDelete);
+route.get('/projetoCreate', controllerProjeto.getCreate);
+route.post('/projetoCreate', controllerProjeto.postCreate);
+route.get('/projetoList', controllerProjeto.getList);
+route.get('/projetoUpdate/:id', controllerProjeto.getUpdate);
+route.post('/projetoUpdate', controllerProjeto.postUpdate);
+route.post('/projetoUpdatePalavrasChave', controllerProjeto.postUpdatePalavrasChave);
+route.post('/projetoDelete/:id', controllerProjeto.deleteProjeto);
 
+// Rotas para visualizar projetos
+route.get('/visualizarProjetos', controllerProjeto.getVisualizarProjetos);
+route.get('/visualizarProjetosFiltrados', controllerProjeto.getVisualizarProjetosFiltrados);
 
-//Controller Receita
-route.get("/receitaCreate", controllerReceita.getCreate);
-route.post("/receitaCreate",  upload.single('imagem'), controllerReceita.postCreate);
-route.get("/receitaList", controllerReceita.getList);
-route.get("/receitaUpdate/:id", controllerReceita.getUpdate);
-route.post("/receitaUpdate", upload.single('imagem'), controllerReceita.postUpdate);
-route.get("/receitaDelete/:id", controllerReceita.getDelete);
-
-//Controller Conhecimento
+//Controller Conhecimento Aluno
 route.get("/conhecimentoCreate", controllerConhecimento.conhecimentosUsuario);
-route.post("/conhecimentoAlunoUpdate", controllerConhecimento.getUpdate);
-route.get("/conhecimentoAluno/delete/:id", controllerConhecimento.getDelete);
+route.post("/conhecimentoAlunoUpdate", controllerConhecimento.updateUsuarioConhecimento);
+route.get("/conhecimentoAluno/delete/:id", controllerConhecimento.deleteUsuarioConhecimento);
 
+//Controller Conhecimento Admin
+route.get("/conhecimentoCreateAdmin", controllerConhecimento.getCreate);
+route.post("/conhecimentoCreateAdmin", controllerConhecimento.postCreate);
+route.get("/conhecimentoList", controllerConhecimento.getList);
+route.get("/conhecimentoUpdate/:id", controllerConhecimento.getUpdate);
+route.post("/conhecimentoUpdate", controllerConhecimento.postUpdate);
+route.post("/conhecimentoDelete/:id", controllerConhecimento.postDelete);
+
+// Rota para o relatório
+route.get('/relatorio', controllerRelatorio.getRelatorio);
+
+// Rota para o relatório
+route.get('/relatorio', controllerRelatorio.getRelatorio);

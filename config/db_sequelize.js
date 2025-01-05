@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('Trabalho1', 'postgres', '1234', {
+const sequelize = new Sequelize('postgres2', 'postgres', 'postgres', {
     host: 'localhost',
     dialect: 'postgres',
     logging: true
@@ -8,9 +8,6 @@ const sequelize = new Sequelize('Trabalho1', 'postgres', '1234', {
 var db = {};
 db.sequelize = sequelize;
 db.Receita = require('../models/relational/receita.js')(sequelize, Sequelize);
-
-//db.Categoria = require('../models/relational/categoria.js')(sequelize, Sequelize);
-//db.Categoria.hasMany(db.Receita, {foreignKey:'categoriaId', onDelete: 'NO ACTION'});
 
 //Parte nova
 db.Usuario = require('../models/relational/usuario.js')(sequelize, Sequelize); //Mesmo que o exemplo
@@ -24,7 +21,6 @@ db.ProjetoAluno = require('../models/projeto_web/projeto_aluno.js')(sequelize, S
 // Relacionamento: Aluno pode ter muitos Projetos (muitos para muitos)
 db.Usuario.hasMany(db.ProjetoAluno, {foreignKey:'usuarioId', onDelete: 'NO ACTION'});
 db.Projeto.hasMany(db.ProjetoAluno, {foreignKey:'projetoId', onDelete: 'NO ACTION'});
-
 
 // Relacionamento muitos-para-muitos entre Projeto e PalavraChave
 db.PalavraChave.hasMany(db.ProjetoPalavraChave, {foreignKey:'palavraChaveId', onDelete: 'NO ACTION'});

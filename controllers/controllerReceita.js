@@ -1,5 +1,4 @@
 const db = require('../config/db_sequelize');
-const path = require('path');
 
 module.exports = {
     async getCreate(req, res) {

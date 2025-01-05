@@ -1,4 +1,4 @@
-<form action="/projetoCreate" method="post">​
+<form action="/projetoCreate" method="post">
     <div class="form-group">
         <label for="inputNome">Nome</label>
         <input type="text" class="form-control" id="inputNome" name="nome">
@@ -12,26 +12,24 @@
         <input type="text" class="form-control" id="inputLinkExterno" name="link_externo">
     </div>
     <div class="form-group">
-        <label for="palavraChave">Palavra Chave:</label>
-        <table>
+        <label for="palavraChaveIds">Palavras Chave:</label>
+        <select name="palavraChaveIds" multiple class="form-control">
             {{#each palavraChave}}
-            <tr>
-                <td><input type="checkbox" name="palavraChave[]" value="{{id}}"></td>
-                <td>{{nome}}</td>
-            </tr>
+                <option value="{{id}}">
+                    {{nome}}
+                </option>
             {{/each}}
-        </table>
+        </select>
     </div>
     <div class="form-group">
-        <label for="alunos">Alunos:</label>
-        <table>
-            {{#each alunos}}
-            <tr>
-                <td><input type="checkbox" name="alunos[]" value="{{id}}"></td>
-                <td>{{login}}</td>
-            </tr>
+        <label for="usuarioIds">Usuários:</label>
+        <select name="usuarioIds" multiple class="form-control">
+            {{#each usuarios}}
+                <option value="{{this.id}}">
+                    {{this.login}}
+                </option>
             {{/each}}
-        </table>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
 </form>

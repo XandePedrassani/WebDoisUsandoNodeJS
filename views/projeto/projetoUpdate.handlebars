@@ -1,5 +1,5 @@
 <form action="/projetoUpdate" method="post">
-    <input type="hidden" name="id" value={{projeto.id}}>
+    <input type="hidden" name="id" value="{{projeto.id}}">
     <div class="form-group">
         <label for="inputNome">Nome</label>
         <input type="text" class="form-control" id="inputNome" name="nome" value="{{projeto.nome}}">
@@ -14,28 +14,43 @@
         <input type="text" class="form-control" id="inputLinkExterno" name="link_externo" value="{{projeto.link_externo}}">
     </div>
 
-   <div class="form-group">
-        <label for="palavraChave">Palavra Chave:</label>
-        <table>
-            {{#each palavraChave}}
-            <tr>
-                <td><input type="checkbox" name="palavraChave[]" value="{{id}}"></td>
-                <td>{{nome}}</td>
-            </tr>
-            {{/each}}
-        </table>
-    </div>
     <div class="form-group">
-        <label for="alunos">Alunos:</label>
-        <table>
-            {{#each alunos}}
-            <tr>
-                <td><input type="checkbox" name="alunos[]" value="{{id}}"></td>
-                <td>{{login}}</td>
-            </tr>
+        <label for="usuarioIds">Usuários:</label>
+        <select name="usuarioIds" multiple class="form-control">
+            {{#each projetoAlunos}}
+                <option value="{{this.id}}" selected>{{this.login}}</option>
             {{/each}}
-        </table>
+            {{#each alunos}}
+                <option value="{{this.id}}">{{this.login}}</option>
+            {{/each}}
+        </select>
     </div>
-    <br> <br>
-    <button type="submit" class="btn btn-primary">Editar</button>
+
+    <div class="form-group">
+        <label for="palavraChaveIds">Palavras Chave:</label>
+        <select name="palavraChaveIds" multiple class="form-control">
+            {{#each projetoPalavrasChave}}
+                <option value="{{this.id}}" selected>{{this.nome}}</option>
+            {{/each}}
+            {{#each palavraChave}}
+                <option value="{{this.id}}">{{this.nome}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
+
+<form action="/projetoDelete/{{projeto.id}}" method="post">
+    <button type="submit" class="btn btn-danger">Remover Projeto</button>
+</form>
+
+<script>
+    document.getElementById('editPalavrasChaveBtn').addEventListener('click', function() {
+        var form = document.getElementById('editPalavrasChaveForm');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+</script>

@@ -12,5 +12,14 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
+    PalavraChave.associate = (models) => {
+        PalavraChave.belongsToMany(models.Projeto, {
+            through: 'ProjetoPalavraChave',
+            foreignKey: 'palavraChaveId',
+            as: 'Projetos',
+            onDelete: 'NO ACTION'
+        });
+    };
+
     return PalavraChave;
 };

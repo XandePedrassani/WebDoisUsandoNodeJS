@@ -1,16 +1,14 @@
 const routes = require('./routers/route');
 const handlebars = require('express-handlebars');
-const express = require('express');
-//var cookieParser = require('cookie-parser');
-var session = require('express-session');
-const middlewares = require('./middlewares/middlewares');
-const app = express();
+const express = require('express');
 const path = require('path');
+const session = require('express-session');
+const middlewares = require('./middlewares/middlewares');
+
+const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:'textosecreto$asdfasdfaswwww',
         cookie:{maxAge: 30*60*1000}}));
-//app.use(cookieParser());
-
 
 app.engine('handlebars', handlebars.engine({defaultLayout:'main'}));
 app.set('view engine','handlebars');

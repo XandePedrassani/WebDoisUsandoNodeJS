@@ -6,7 +6,6 @@ module.exports = {
         res.render('usuario/login', { layout: 'noMenu.handlebars' });
     },
     async getLogout(req, res) {
-        //res.cookie("userData", req.cookies.userData, { maxAge: 0, httpOnly: true });
         req.session.destroy();
         res.redirect('/');
     },
@@ -17,13 +16,21 @@ module.exports = {
         db.Usuario.findAll({ where: { login: req.body.login, senha: req.body.senha } }
         ).then(usuarios => {
             if (usuarios.length > 0) {
-                //res.cookie("userData", user, { maxAge:30 * 60 * 1000, httpOnly: true });
                 req.session.login = req.body.login;
                 res.locals.login = req.body.login; 
                 req.session.userId = usuarios[0].dataValues.id;
                 if (usuarios[0].dataValues.tipo == 2) {
                     req.session.tipo = usuarios[0].dataValues.tipo;
+                    req.session.admin = true;
                     res.locals.admin = true;
+                } else if (usuarios[0].dataValues.tipo == 1){
+                    req.session.tipo = usuarios[0].dataValues.tipo;
+                    req.session.aluno = true;
+                    res.locals.aluno = true;
+                } else if (usuarios[0].dataValues.tipo == 3){
+                    req.session.tipo = usuarios[0].dataValues.tipo;
+                    req.session.externo = true;
+                    res.locals.externo = true;
                 }
                 res.render('home');
             } else
@@ -70,4 +77,4 @@ module.exports = {
             console.log(err);
         });
     }
-}   
+}
