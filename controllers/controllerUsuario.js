@@ -1,5 +1,5 @@
 const db = require('../config/db_sequelize');
-const path = require('path');
+const { QueryTypes } = require('sequelize');
 
 module.exports = {
     async getLogin(req, res) {
@@ -71,10 +71,19 @@ module.exports = {
         });
     },
     async getDelete(req, res) {
-        await db.Usuario.destroy({ where: { id: req.params.id } }).then(
-            res.render('home')
-        ).catch(err => {
+        try {
+            const usuarioId = req.params.id;
+
+            // Remover referências na tabela projeto_alunos
+            await db.sequelize.query('DELETE FROM projeto_alunos WHERE "usuarioId" = ?', { replacements: [usuarioId], type: QueryTypes.DELETE });
+
+            // Deletar o usuário
+            await db.sequelize.query('DELETE FROM usuarios WHERE id = ?', { replacements: [usuarioId], type: QueryTypes.DELETE });
+
+            res.redirect('/usuarioList');
+        } catch (err) {
             console.log(err);
-        });
+            res.status(500).send('Erro ao deletar o usuário.');
+        }
     }
 }

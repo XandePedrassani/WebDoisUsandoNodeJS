@@ -14,7 +14,7 @@ const route = express.Router();
 //   .catch((error) => console.error(error));
 
 
-// db.Usuario.create({login:'admin', senha:'1234', tipo:2});
+//db.Usuario.create({login:'admin', senha:'1234', tipo:2});
 // db.Usuario.create({login:'externo', senha:'1234', tipo:3});
 // db.Conhecimento.create({nome:'Programação'});
 // db.Conhecimento.create({nome:'Liderança'});
