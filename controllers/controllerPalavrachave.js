@@ -1,4 +1,5 @@
 const db = require('../config/db_sequelize');
+const { QueryTypes } = require('sequelize');
 
 module.exports = {
     async getCreate(req, res) {
@@ -33,10 +34,19 @@ module.exports = {
         });
     },
     async getDelete(req, res) {
-        await db.PalavraChave.destroy({ where: { id: req.params.id } }).then(
-            res.render('home')
-        ).catch(err => {
+        try {
+            const palavraChaveId = req.params.id;
+
+            // Remover referências na tabela projeto_palavra_chaves
+            await db.sequelize.query('DELETE FROM projeto_palavra_chaves WHERE "palavraChaveId" = ?', { replacements: [palavraChaveId], type: QueryTypes.DELETE });
+
+            // Deletar a palavra-chave
+            await db.sequelize.query('DELETE FROM palavra_chaves WHERE id = ?', { replacements: [palavraChaveId], type: QueryTypes.DELETE });
+
+            res.redirect('/palavrachaveList');
+        } catch (err) {
             console.log(err);
-        });
+            res.status(500).send('Erro ao deletar a palavra-chave.');
+        }
     }
-}   
+}
